@@ -3,6 +3,6 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        FindContinuousSequence.FindContinuousSequence(9);
+        System.out.println(JumpFloorII.JumpFloorII(4));
     }
 }
