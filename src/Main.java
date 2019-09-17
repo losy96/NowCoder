@@ -5,7 +5,6 @@ public class Main {
 //        System.out.println(NumberOf1Between1AndN_Solution.NumberOf1Between1AndN_Solution(1));
 //        sougou.
 //        System.out.println(ReversalNum.ReversalNum(1134423449));
-        int[] a = {1,1,1,1,1,1,1};
-        System.out.println(ArithmeticProgression.start(a));
+        NumberOf1.NumberOf1(-3);
     }
 }
