@@ -2,14 +2,17 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-//        System.out.println(NumberOf1Between1AndN_Solution.NumberOf1Between1AndN_Solution(1));
-//        sougou.
-//        System.out.println(ReversalNum.ReversalNum(1134423449));
-//        NumberOf1.NumberOf1(-3);
-        TreeNode root = new TreeNode(1);
-        root.right = new TreeNode(2);
-        root.left = new TreeNode(4);
-        root.left = new TreeNode(1);
-        System.out.println(TreeDepth.TreeDepth(root));
+//        System.out.println(Power.Power(2,-1));
+//        TreeNode root  = new TreeNode(2);
+//        root.left = new TreeNode(3);
+//        root.right = new TreeNode(4);
+//        root.right.right = new TreeNode(5);
+//        ArrayList<Integer> anser = PrintFromTopToBottom.PrintFromTopToBottom(null);
+//        for (int i:anser){
+//            System.out.println(i);
+//        }
+        System.out.println(StrToInt.StrToInt("-12s3"));
+        String str = "-12a3";
+        System.out.println(str.charAt(0) != '-');
     }
 }
