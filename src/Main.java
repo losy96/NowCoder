@@ -11,8 +11,9 @@ public class Main {
 //        for (int i:anser){
 //            System.out.println(i);
 //        }
-        System.out.println(StrToInt.StrToInt("-12s3"));
-        String str = "-12a3";
-        System.out.println(str.charAt(0) != '-');
+        int[] pre = {1,2,4,3,5,6};
+        int[] in = {4,2,1,5,3,6};
+        TreeNode root = ReConstructBinaryTree.reConstructBinaryTree(pre,in);
+        System.out.println(TreeDepth.TreeDepth(root));
     }
 }
