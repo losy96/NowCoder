@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        char [] a = {'a','a','a'};
-        char[] pattern = {'a','b','*','a','c','*','a'};
-        System.out.println(a);
-        System.out.println(Match.match(a,pattern));
+        TreeNode pHead = new TreeNode(1);
+        pHead.left = new TreeNode(1);
+        pHead.right = new TreeNode(1);
+        System.out.println(IsSymmetrical.isSymmetrical(pHead));
     }
 }
