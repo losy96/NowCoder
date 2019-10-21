@@ -3,7 +3,7 @@ public class EntryNodeOfLoop {
      * 1、判断是否成环，速度不同的指针相遇，则说明成环，记录下当前相遇位置。(慢指针每次走一步，快指针每次走两步)
      * 2、若成环:
      *      设链表起始点为a点，入口点为b点，环内相遇点为c点。
-     *      直到相遇，快指针走的距离为：ab+bc+k(bc+cb)  慢指针走的距离为:ab+bc (一旦慢指针进入环内，两个指针必定在一圈之内相遇)
+     *      直到相遇，快指针走的距离为：ab+bc+k(bc+cb)  慢指针走的距离为:ab+bc (一旦慢指针进入环内，两个指针必定在一圈之内相遇，每次两个)
      *      同样时间内，快指针比慢指针多走2倍的路程所以有等式：2(ab+bc) = ab+bc+k(bc+cb)
      *      上式推导结果=> ab = (k-1)bc + kcb => ab = (k-1)(bc+cb) + cb
      *      即ab长度为cb长度加上k-1圈环的长度，（因为k-1>=0）
@@ -41,6 +41,7 @@ public class EntryNodeOfLoop {
                 if (fastPoint == slowPoint){
                     return fastPoint;
                 }
+                //这部分没啥用，快慢指针每次距离都会缩近一个节点，所以必然是会相遇的，而且是一圈之内。
                 slowPoint = slowPoint.next;
                 if (fastPoint.next!=null){
                     fastPoint = fastPoint.next.next;

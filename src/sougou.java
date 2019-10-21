@@ -46,7 +46,7 @@ public class sougou {
         return anser;
     }
     public static void main(String[] args) {
-//        System.out.println(NumberOf1Between1AndN_Solution.NumberOf1Between1AndN_Solution(1));
+//        System.out.println(NumberOf1Between1AndN.NumberOf1Between1AndN(1));
         sougou.anser(sougou.change("RRRRRLRLRL"));
     }
 }

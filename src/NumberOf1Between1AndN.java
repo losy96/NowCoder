@@ -1,4 +1,4 @@
-public class NumberOf1Between1AndN_Solution {
+public class NumberOf1Between1AndN {
     public static int NumberOf1Between1AndN_Solution(int n) {
         int count = 0;
         /**
