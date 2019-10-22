@@ -6,9 +6,11 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        TreeNode pHead = new TreeNode(1);
-        pHead.left = new TreeNode(1);
-        pHead.right = new TreeNode(1);
-        System.out.println(IsSymmetrical.isSymmetrical(pHead));
+        int[] a = {1};
+        int[] B = Multiply.multiply(a);
+        for (int i=0;i<a.length;i++){
+            System.out.print(B[i]);
+            System.out.print(" ");
+        }
     }
 }
