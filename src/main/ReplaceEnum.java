@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -21,7 +22,10 @@ public class ReplaceEnum {
         String[] codeList = code.split("\n");
         String newCode = codeList[0];//一般文件开始都是package
         for (int i=1;i<codeList.length;i++){
-            if (!codeList[i].startsWith("@")){
+            String pattern = "^[ ]*@";
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(codeList[i]);
+            if (!m.find()){
                 newCode = newCode + "\n" + codeList[i];
             }
         }
@@ -34,7 +38,7 @@ public class ReplaceEnum {
      * @return
      */
     public static String getCodeString(File file){
-        String content = null;
+        String content = "";
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
@@ -50,6 +54,10 @@ public class ReplaceEnum {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        List<String> aa = new ArrayList<>();
+        StringBuffer a = new StringBuffer();
+//        a.append()
+//        Ma
         return content;
     }
 
@@ -75,7 +83,7 @@ public class ReplaceEnum {
         for (int i=1;i<codeList.length;i++){
             String lineCodeStr = codeList[i];
             //进行正则匹配尖括号，如果存在，在进行判断=，如果存在判断是否存在<>，存在则进行替换
-            String pattern = " [A-Z][A-Za-z0-9_]*<[A-Z].*>";
+            String pattern = "[ ]*[A-Z][A-Za-z0-9_]*<[A-Z].*>";
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(lineCodeStr);
             if (m.find()){//判断是否有=
@@ -119,7 +127,20 @@ public class ReplaceEnum {
         newCode = code.replace(" enum."," enum"+POSTFIX+".");
         newCode = newCode.replace("(enum.","(enum"+POSTFIX+".");
         newCode = newCode.replace("\tenum.","\tenum"+POSTFIX+".");
-        newCode = removeAnnotation(newCode);
+        //替换定义 匹配 enum =
+        String[] codeLine = newCode.split("\n");
+        if (codeLine.length > 0){
+            newCode = codeLine[0];
+            for (int i = 1;i<codeLine.length;i++){
+                String pattern = ".*enum[ ]*=";
+                Pattern r = Pattern.compile(pattern);
+                Matcher m = r.matcher(codeLine[i]);
+                if (m.find()){
+                    codeLine[i] = codeLine[i].replace("enum","enum"+POSTFIX);
+                }
+                newCode = newCode +"\n"+ codeLine[i];
+            }
+        }
         return newCode;
     }
 
@@ -136,9 +157,23 @@ public class ReplaceEnum {
                 replaceEnum(f.getPath());
             }else {
                 if (f.toString().endsWith(".java")){
+                    System.out.println(f);
                     String content = getCodeString(f);
                     //过滤
                     //写入文件
+                    System.out.println(content);
+                    content = replaceEnumInString(content);
+                    System.out.println(content);
+                    content = removeAnnotation(content);
+                    System.out.println(content);
+                    content = replaceAngleBrackets(content);
+                    System.out.println(content);
+                    if (null != content){
+                        writeInNewFile(f,content);
+                    }
+                    System.out.println(content);
+                }else {
+                    f.delete();
                 }
             }
         }
@@ -149,11 +184,7 @@ public class ReplaceEnum {
      * @param args
      */
     public static void main(String[] args) {
-        replaceEnum("/Users/lihao/Desktop/学校/实验/替换/argouml");
-        String code = "liaho enum. \tenum.     (enum.xac) @lihao (enum enum.\n \n \n@lihao\npublic Li_st<String<a,<b,c>>> = new Palhao<>()";
-        System.out.println(replaceEnumInString(code));
-        File file = new File("/Users/lihao/Desktop/学校/实验/替换/liaho.txt");
-        writeInNewFile(file,"lihaotest\nhasas");
-        System.out.println(replaceAngleBrackets(code));
+        replaceEnum("/Users/lihao/Desktop/学校/实验/替换/htmlunit-2.7");
+//        String con = getCodeString(new File("/Users/lihao/Desktop/学校/实验/替换/neuroph_2.2/src/org/neuroph/util/TransferFunctionType.java"));
     }
 }
